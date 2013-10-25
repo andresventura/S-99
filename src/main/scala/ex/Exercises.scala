@@ -46,14 +46,36 @@ object Exercises {
     case head :: tail                      => head :: compress(tail)
   }
 
-  def pack(list: List[Symbol]): List[Any] = list match {
+  def pack(list: List[Symbol]): List[List[Symbol]] = list match {
     case Nil => Nil
     case head :: tail => List(head :: tail.takeWhile(_ == head)) ::: pack(tail.dropWhile(_ == head))
   }
 
-  def encode(list: List[Symbol]): List[(Int, Symbol)] = list match {
+  def encodeDirect(list: List[Symbol]): List[(Int, Symbol)] = list match {
     case Nil => Nil
-    case head :: tail => List((tail.takeWhile(_ == head).size + 1, head)) ::: encode(tail.dropWhile(_ == head))
+    case head :: tail => List((tail.takeWhile(_ == head).size + 1, head)) ::: encodeDirect(tail.dropWhile(_ == head))
+  }
+
+  def encode(list: List[Symbol]): List[(Int, Symbol)] = pack(list).map {e => (e.size, e.head)}
+
+  def encodeModified(list: List[Symbol]): List[Any] = list match {
+    case Nil => Nil
+    case head :: tail => tail.takeWhile(_ == head).size match {
+      case 0 => head :: encodeModified(tail)
+      case size: Int => List((size + 1, head)) ::: encodeModified(tail.dropWhile(_ == head))
+    }
+  }
+
+  def decode[A](ls: List[(Int, A)]): List[A] = ls flatMap { e => List.fill(e._1)(e._2) }
+
+  def duplicate(list: List[Symbol]): List[Symbol] = list match {
+    case Nil => Nil
+    case head :: tail => head :: head :: duplicate(tail)
+  }
+
+  def duplicateN(times: Int, list: List[Symbol]): List[Symbol] = list match {
+    case Nil => Nil
+    case head :: tail => List.fill(times)(head) ::: duplicateN(times, tail)
   }
 
 }

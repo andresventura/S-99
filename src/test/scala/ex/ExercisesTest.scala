@@ -35,7 +35,6 @@ class ExercisesTest extends FunSuite with BeforeAndAfter {
   test("Test P08") {
     assert(Exercises.compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) === List('a, 'b, 'c, 'a, 'd, 'e))
     assert(Exercises.compress(Nil) === Nil)
-
   }
 
   test("Test P09") {
@@ -50,6 +49,30 @@ class ExercisesTest extends FunSuite with BeforeAndAfter {
       List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
   }
 
+  test("Test P11") {
+    assert(Exercises.encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) ===
+      List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e)))
+  }
+
+  test("Test P12") {
+    assert(Exercises.decode(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))) ===
+      List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+  }
+
+  test("Test P13") {
+    assert(Exercises.encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) ===
+      List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
+  }
+
+  test("Test P14") {
+    assert(Exercises.duplicate(List('a, 'b, 'c, 'c, 'd)) ===
+      List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
+  }
+
+  test("Test P15") {
+    assert(Exercises.duplicateN(3, List('a, 'b, 'c, 'c, 'd)) ===
+      List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
+  }
 
 
 }
