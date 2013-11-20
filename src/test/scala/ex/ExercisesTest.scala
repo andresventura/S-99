@@ -74,5 +74,20 @@ class ExercisesTest extends FunSuite with BeforeAndAfter {
       List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
   }
 
+  test("Test P16") {
+    assert(Exercises.drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) ===
+      List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k))
+  }
+
+  test("Test P17") {
+    assert(Exercises.split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) ===
+      (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k)))
+  }
+
+  ignore("Test P18") {
+    assert(Exercises.slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) ===
+      List('d, 'e, 'f, 'g))
+  }
+
 
 }
